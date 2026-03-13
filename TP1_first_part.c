@@ -1,11 +1,34 @@
 #include <stdio.h>
 
+int power_calculation(int a, int b)
+{
+    int res = 1;
+    for (int i = 0; i < b; i++)
+    {
+        res = res * a;
+    }
+    return res;
+}
+
+void power()
+{
+    int a, b;
+    int res = 1;
+    printf("Enter a base number: ");
+    scanf("%d", &a);
+    printf("Enter the power: ");
+    scanf("%d", &b);
+    res = power_calculation(a, b);
+    printf("%d to the power of %d equals %d", a, b, res);
+}
+
 int main(void)
 {
     int exo;
     printf("Exercise number");
     scanf("%d", &exo);
     int buffer_test;
+    // Emptying the buffer to prevent input issues with chars
     while((buffer_test = getchar()) != '\n' && buffer_test != EOF){}
     switch (exo)
     {
@@ -62,7 +85,19 @@ int main(void)
             float e = 0.3;
             printf("   %.2f \n", e);
         }
-    default : return 0;
+    case 6:
+        {
+            power();
+            return 0;
+        }
+    case 7:
+        {
+            
+        }
+    default :
+        {
+            printf("Default case");
+        }
     }
-
 }
+
