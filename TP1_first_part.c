@@ -10,6 +10,13 @@ int power_calculation(int a, int b)
     return res;
 }
 
+unsigned long long int factorial_calculation(long int n)
+{
+    if (n == 0) return 1;
+    unsigned long long int factorial = n*(factorial_calculation(n-1));
+    return factorial;
+}
+
 void power()
 {
     int a, b;
@@ -90,9 +97,18 @@ int main(void)
             power();
             return 0;
         }
-    case 7:
+    case 7: //Calculating the factorial value of a number recursively
         {
-            
+            long int n = -1;
+            unsigned long long int res;
+            do
+            {
+                printf("Enter a non-negative number (it's factorial value will be calculated):" );
+                scanf("%ld", &n);
+            }while (n<0);
+            res = factorial_calculation(n);
+            printf("The factorial value of %ld is %llu\n", n, res);
+            return 0;
         }
     default :
         {

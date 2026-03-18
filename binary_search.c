@@ -7,7 +7,8 @@ int binary_search(const int array[], const int LENGTH, int value_searched)
     int value;
     while (low<=high)
     {
-        mid = (high+low)/2;
+        // This formula is better than doing high+low/2 because it avoids addition (in edge cases - overflow danger)
+        mid = low+(high-low)/2;
         value = array[mid];
         if (value < value_searched)
         {
