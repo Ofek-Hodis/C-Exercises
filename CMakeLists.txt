@@ -14,5 +14,8 @@ add_executable(binary_search binary_search.c)
 
 add_executable(racine_newton racine_newton.c)
 
+add_executable(TD4 TD4.c)
+
+
 
 
