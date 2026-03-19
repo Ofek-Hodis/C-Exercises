@@ -16,6 +16,8 @@ add_executable(racine_newton racine_newton.c)
 
 add_executable(TD4 TD4.c)
 
+add_executable(sort_functions sort_functions.c)
+
 
 
 
