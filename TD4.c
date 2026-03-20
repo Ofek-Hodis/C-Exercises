@@ -83,7 +83,6 @@ void supprimerValeur(int T[], int * n, int val)
 			break;
 		}
 	}
-
 }
 
 // e) Supprimer toutes les occurrences
@@ -248,6 +247,24 @@ void exo5(const int array[], const int SIZE)
 void exo6()
 {
 	int array[10];
+	int sum=0;
+	int size;
+	printf("Enter the size of your array (no more than 20)");
+	scanf("%d", &size);
+	for (int i=0; i<size; i++)
+	{
+		printf("Enter a value");
+		scanf("%d", &array[i]);
+		sum += array[i];
+	}
+	int average = sum / size;
+	printf("The average of the values in this array is %d and the sum of them is %d", average, sum);
+}
+
+
+void exo7()
+{
+	int array[10];
 	int min, n=0, more=1;
 	while (more == 1 && n<10)
 	{
@@ -258,66 +275,152 @@ void exo6()
 		scanf("%d", &more);
 	}
 	min = array[0];
-	for (int i=1; i<n; i++)
+	for (int i=1; i<n; i++)// Could be calculated when entering values and avoid this loop
 	{
 		if (array[i] < min) min = array[i];
 	}
 	printf("The minimum value of the array is %d", min);
-
 }
 
 
-void exo7()
+void exo8(const int array1[], const int array2[], const int SIZE)
 {
+	int is_same=1;
+	for (int i=0; i<SIZE; i++)
+	{
+		if (array1[i] != array2[i])
+		{
+			is_same = 0;
+			break;
+		}
+	}
+	if (is_same == 0) printf("The arrays are different");
+	else printf("The two arrays are the same");
+}
 
+void exo9(const int array[], const int SIZE)
+{
+	for (int i=0; i<SIZE-1; i++)
+	{
+		if (array[i] > array[i+1])
+		{
+			printf("The array isn't sorted\n");
+			return; // Used to break out of the function, no value returned
+		}
+	}
+	printf("The array is sorted\n");
+}
+
+void exo10(const int array[], const int SIZE, const int value)
+{
+	for (int i=0; i<SIZE; i++)
+	{
+		if (array[i] == value)
+		{
+			printf("Value present in array");
+			return;
+		}
+	}
+	printf("Value no present in array");
 }
 
 
-void exo8()
+int exo11(const int array[], const int SIZE, const int value)
 {
-
+	int count=0;
+	for (int i=0; i<SIZE; i++)
+	{
+		if (array[i] == value)
+		{
+			count++;
+		}
+	}
+	return count;
 }
 
-void exo9()
+void exo12(const int array[], const int SIZE, const int value)
 {
-
-}
-
-void exo10()
-{
-
-}
-
-
-void exo11()
-{
-
-}
-
-void exo12()
-{
-
-}
-
-
-void exo13()
-{
-
+	int count=0;
+	for (int i=0; i<SIZE; i++)
+	{
+		if (array[i] == value)
+		{
+			printf("%d ", i+1);
+			count++;
+		}
+	}
+	if (count == 0) printf("The value does not appear in the array");
 }
 
 
-void exo14()
+void exo13(int array[], const int SIZE)
 {
-
+	int temp = array[0];
+	for (int i=0; i<SIZE-1; i++)
+	{
+		array[i] = array[i+1];
+	}
+	array[SIZE-1] = temp;
 }
 
-void exo15()
-{
 
+void exo14(const int array[], const int SIZE, const int value)
+{
+	for (int i=0; i<SIZE; i++)
+	{
+		if (array[i] == value)
+		{
+			printf("Value present in array");
+			return;
+		}
+		if (array[i] > value)
+		{
+			printf("Value not present in array");
+			return;
+		}
+		printf("%d \n", i);
+	}
+	printf("Value not present in array");
 }
 
-void exo16()
+void exo15(int array[], const int SIZE)
 {
+	int temp = array[SIZE-1];
+	for (int i=SIZE-1; i>0; i--)
+	{
+		array[i] = array[i-1];
+	}
+	array[0] = temp;
+}
+
+void exo16(const int array[], const int SIZE)
+{
+	int streak_start;
+	int long_streak_start;
+	int long_streak=0;
+	int streak_count=0;
+	for (int i=0; i<SIZE; i++)
+	{
+		if (array[i] == 0)
+		{
+			if (streak_count == 0)
+			{
+				streak_start = i;
+			}
+			streak_count++;
+		}
+		if (streak_count > long_streak)
+		{
+			printf("%d\n", long_streak_start);
+			long_streak=streak_count;
+			long_streak_start = streak_start;
+		}
+		if (array[i] == 1)
+		{
+			streak_count = 0;
+		}
+	}
+	printf("The longest streak of 0 is %d and it starts at index %d", long_streak, long_streak_start);
 
 }
 
@@ -358,15 +461,89 @@ int main() {
 			}
 		case 6 : exo6(); break;
 		case 7 : exo7(); break;
-		case 8 : exo8(); break;
-		case 9 : exo9(); break;
-		case 10 : exo10(); break;
-		case 11 : exo11(); break;
-		case 12 : exo12(); break;
-		case 13:  exo13(); break;
-		case 14 : exo14(); break;
-		case 15 : exo15(); break;
-		case 16 : exo16(); break;
+		case 8 :
+			{
+				const int SIZE = 5;
+				int array1[] = {1,2,-3,4,5};
+				int array2[] = {1,-3,2,4,5};
+				exo8(array1, array2, SIZE);
+				break;
+			}
+		case 9 :
+			{
+				const int SIZE = 6;
+				int array1[] = {-1,-1,0,4,6,10};
+				int array2[] = {10,9,3,0,2,5};
+				exo9(array1, SIZE);
+				exo9(array2, SIZE);
+				break;
+			}
+		case 10 :
+			{
+				int array[] = {1,3,5,7,9,11};
+				const int SIZE = 6;
+				int value = 0;
+				printf("Enter the value you are looking for");
+				scanf("%d", &value);
+				exo10(array, SIZE, value);
+				break;
+			}
+		case 11 :
+			{
+				int array[] = {1,3,3,5,7,9,11};
+				const int SIZE = 7;
+				int value = 0;
+				printf("Enter the value you are looking for");
+				scanf("%d", &value);
+				int count = exo11(array, SIZE, value);
+				printf ("The value %d appears %d times in the array", value, count);
+				break;
+			}
+		case 12 :
+			{
+				int array[] = {1,3,3,5,7,9,11};
+				const int SIZE = 7;
+				int value = 0;
+				printf("Enter the value you are looking for");
+				scanf("%d", &value);
+				exo12(array, SIZE, value);
+				break;
+			}
+		case 13:
+			{
+				int array[] = {1,3,3,5,7,9,11};
+				const int SIZE = 7;
+				afficher(array, SIZE);
+				exo13(array, SIZE);
+				afficher(array, SIZE);
+				break;
+			}
+		case 14:
+			{
+				int array[] = {1,3,3,5,7,9,11};
+				const int SIZE = 7;
+				int value = 0;
+				printf("Enter the value you are looking for");
+				scanf("%d", &value);
+				exo14(array, SIZE, value);
+				break;
+			}
+		case 15:
+			{
+				int array[] = {1,3,3,5,7,9,11};
+				const int SIZE = 7;
+				afficher(array, SIZE);
+				exo15(array, SIZE);
+				afficher(array, SIZE);
+				break;
+			}
+		case 16:
+			{
+				int array[] = {1,0,1,0,0,0,1,1,0,0,0,0,0};
+				const int SIZE = 13;
+				exo16(array, SIZE);
+				break;
+			}
 		case 17 : exo17(); break;
 		default : printf("Invalid choice\n"); break;
 	}

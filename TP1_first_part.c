@@ -10,7 +10,7 @@ int power_calculation(int a, int b)
     return res;
 }
 
-unsigned long long int factorial_calculation(long int n)
+unsigned long long int factorial_calculation(const long int n)
 {
     if (n == 0) return 1;
     unsigned long long int factorial = n*(factorial_calculation(n-1));
