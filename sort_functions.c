@@ -49,6 +49,18 @@ void selection_sort(int array[], const int SIZE)
     }
 }
 
+void insertion_sort(int array[], const int SIZE)
+{
+    int temp =0;
+    for (int i=0; i<SIZE; i++)
+    {
+        for (int j = SIZE-1; j>i; j--)
+        {
+
+        }
+    }
+}
+
 int main()
 {
     int exercise;

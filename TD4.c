@@ -5,7 +5,7 @@ General displaying and reading functions
 *****************************************************************************************/
 
 // Displaying the contents of an array
-void afficher(int T[], int n)
+void afficher(const int T[], int n)
 {
 	for (int i=0; i<n; i++)
 	{
@@ -378,7 +378,6 @@ void exo14(const int array[], const int SIZE, const int value)
 			printf("Value not present in array");
 			return;
 		}
-		printf("%d \n", i);
 	}
 	printf("Value not present in array");
 }
@@ -424,10 +423,48 @@ void exo16(const int array[], const int SIZE)
 
 }
 
-
-void exo17()
+int value_present(const int array[], const int SIZE, const int value)
 {
+	for (int i=0; i<SIZE; i++)
+	{
+		if (array[i] == value)
+		{
+			return 1;
+		}
+	}
+	return 0;
+}
 
+// We suppose SIZE2>SIZE1
+void exo17(const int array1[], const int SIZE1, const int array2[], const int SIZE2)
+{
+	int intersection[SIZE1]; //Common values to both arrays - chosen smaller size.
+	int intersection_size = 0;
+	for (int i=0; i<SIZE2; i++)
+	{
+		if (value_present(array1, SIZE1, array2[i]) == 1)
+		{
+			intersection[intersection_size] = array2[i];
+			intersection_size++;
+		}
+	}
+	afficher(intersection, intersection_size);
+}
+
+void exo18()
+{
+	char str1[100] = "Hello,";
+	char str2[100] = " World!";
+	char *p1 = str1;
+	char *p2 = str2;
+
+	for (; *p1 != '\0'; p1++){}
+	for (; *p2 != '\0'; p2++, p1++) // Connecting both strings
+	{
+		*p1 = *p2;
+	}
+	printf("%s \n", str1);
+	printf("The last charcter is now at %p", p1);
 }
 
 /*****************************************************************
@@ -437,9 +474,9 @@ void exo17()
 int main() {
 	int choice;
 	do {
-		printf("choose exercise number : ");
+		printf("choose exercise number : \n");
 		scanf("%d", &choice);
-	} while (choice < 0 || choice > 17);
+	} while (choice < 0);
 
 	switch (choice) {
 		case 1 : exo1(); break;
@@ -544,7 +581,19 @@ int main() {
 				exo16(array, SIZE);
 				break;
 			}
-		case 17 : exo17(); break;
+		case 17:
+			{
+				int array1[] = {-3,44,10,1,3,17,5,7,9,11};
+				int array2[] = {-3,10,1,3,5,7,9,11,32,43,8,-6};
+				const int SIZE1 = 10, SIZE2 = 12;
+				exo17(array1, SIZE1, array2, SIZE2);
+				break;
+			}
+		case 18:
+		{
+				exo18();
+				break;
+		}
 		default : printf("Invalid choice\n"); break;
 	}
 
