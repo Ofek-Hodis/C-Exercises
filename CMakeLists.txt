@@ -18,6 +18,6 @@ add_executable(TD4 TD4.c)
 
 add_executable(sort_functions sort_functions.c)
 
-
+add_executable(TD5 TD5.c)
 
 
