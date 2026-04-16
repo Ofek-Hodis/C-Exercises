@@ -1,11 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int exo3(const int (*t)[3], const int rows, const int colones)
+void allocate_table(int **t, int lines, int rows)
+{
+
+}
+
+void exo3(const int (*t)[3], const int rows, const int columns)
 {
     for (int i=0; i<rows; i++)
     {
-        for (int j=0; j<colones; j++)
+        for (int j=0; j<columns; j++)
         {
             printf("%d ", t[i][j]);
         }
@@ -13,12 +18,12 @@ int exo3(const int (*t)[3], const int rows, const int colones)
     }
 }
 
-int exo4(const int (*t)[3], const int rows, const int colones)
+void exo4(const int (*t)[3], const int rows, const int columns)
 {
     int sum=0;
     for (int i=0; i<rows; i++)
     {
-        for (int j=0; j<colones; j++)
+        for (int j=0; j<columns; j++)
         {
             sum += t[i][j];
         }
@@ -26,7 +31,7 @@ int exo4(const int (*t)[3], const int rows, const int colones)
     printf("%d \n", sum);
 }
 
-int diagonal_sum(const int (*t)[3], const int size_2d) // The same amount of lines and colones
+void diagonal_sum(const int * const *t, const int size_2d) // The same amount of lines and colones
 {
     int sum=0;
     for (int i=0; i<size_2d; i++)
@@ -36,7 +41,7 @@ int diagonal_sum(const int (*t)[3], const int size_2d) // The same amount of lin
     printf("%d \n", sum);
 }
 
-int anti_diagonal_sum(const int (*t)[3], const int size_2d) // The same amount of lines and colones
+void anti_diagonal_sum(const int (*t)[3], const int size_2d) // The same amount of lines and colones
 {
     int sum=0;
     for (int i=0; i<size_2d; i++)
@@ -46,12 +51,22 @@ int anti_diagonal_sum(const int (*t)[3], const int size_2d) // The same amount o
     printf("%d \n", sum);
 }
 
-int line_sum(const int rows, const int colons, const int t[rows][colons], const int l)
+void line_sum(const int rows, const int columns, const int t[rows][columns], const int l) // exercise 7
 {
     int sum=0;
-    for (int i=0; i<colons; i++)
+    for (int i=0; i<columns; i++)
     {
         sum += t[l][i];
+    }
+    printf("%d \n", sum);
+}
+
+void column_sum(const int rows, const int columns, const int t[rows][columns], const int c) // exercise 7
+{
+    int sum=0;
+    for (int i=0; i<rows; i++)
+    {
+        sum += t[i][c];
     }
     printf("%d \n", sum);
 }
@@ -80,8 +95,37 @@ int main()
 
     case 5 :
         {
-            int t[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}};
-            diagonal_sum(t, 3);
+            int size_2d;
+            printf("Enter the number of rows and columns in your table");
+            scanf("%d", &size_2d);
+            int **t = malloc(size_2d*sizeof(int *)); // Allocating for pointers, sizeof(int *)
+            if (t == NULL) return 1; // Checking for allocation failure
+            for (int i=0; i<size_2d; i++)
+            {
+                t[i] = malloc(size_2d*sizeof(int));
+                if (t[i] == NULL)
+                {
+                    for (int j=i; j>=0; j--)
+                    {
+                        free(t[j]);
+                    }
+                    free(t);
+                    return 1; // Checking for allocation failure
+                }
+            }
+            for (int i=0; i<size_2d; i++)
+            {
+                for (int j=0; j<size_2d; j++)
+                {
+                    t[i][j] = i+j;
+                }
+            }
+            diagonal_sum(t, size_2d);
+            for (int i=0; i<size_2d; i++)
+            {
+                free(t[i]);
+            }
+            free(t);
             break;
         }
     case 6 :
@@ -97,7 +141,13 @@ int main()
             break;
         }
         default : break;
-
+    case 8 :
+        {
+            int t[3][3] = {{1,2,3}, {4,5,6}, {29,8,9}};
+            column_sum(3, 3, t, 2);
+            break;
+        }
 }
     return 0;
 }
+
