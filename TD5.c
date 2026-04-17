@@ -71,6 +71,24 @@ void column_sum(const int rows, const int columns, const int t[rows][columns], c
     printf("%d \n", sum);
 }
 
+int** reverse_array(const int rows, const int columns, const int t[rows][columns])
+{
+    int ** m = malloc(columns*sizeof(int));
+    for (int i=0; i < columns; i++)
+    {
+        m[i] = malloc(rows*sizeof(int));
+    }
+
+    for (int i=0; i<columns; i++)
+    {
+        for (int j=0; j<rows; j++)
+        {
+            m[i][j] = t[j][i];
+        }
+    }
+    return m;
+}
+
 int main()
 {
     int choice;
@@ -140,13 +158,61 @@ int main()
             line_sum(3, 3, t, 1);
             break;
         }
-        default : break;
     case 8 :
         {
             int t[3][3] = {{1,2,3}, {4,5,6}, {29,8,9}};
             column_sum(3, 3, t, 2);
             break;
         }
+    case 9:
+        {
+            int t[3][4] = {{1,2,3,4}, {5,6,7,8}, {9,10,11,12}};
+            int **m = reverse_array(3,4,t);
+            for (int i=0; i < 4; i++)
+            {
+                for (int j=0; j<3; j++)
+                {
+                    printf("%d ", m[i][j]);
+                }
+                printf("\n");
+            }
+
+            for (int i=0; i<4; i++)
+            {
+                free(m[i]);
+            }
+            free(m);
+        }
+    case 10 : // Palindrome detection exercise
+        {
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF) { // Emptying the input buffer
+                ;
+            }
+
+            const int SIZE = 5;
+            char STRING[SIZE];
+            int length = sizeof(STRING)/sizeof(char);
+            length--;
+            printf("Enter your string\n");
+            scanf("%s", STRING);
+
+            for (int i=0; i<length/2; i++)
+            {
+                if (STRING[i] != STRING[length-i-1])
+                {
+                    printf("");
+                    printf("%s is not a palindrome", STRING);
+                    return 0;
+                }
+            }
+            printf("%s is a palindrome", STRING);
+            break;
+        }
+
+    default : break;
+
+
 }
     return 0;
 }
