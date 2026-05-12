@@ -117,6 +117,85 @@ void bubble_sort(int t[], const int N)
     }
 }
 
+void selection_sort(int t[], const int N)
+{
+    int temp = 0;
+    int count = 0;
+    for (int i=0; i<N; i++)
+    {
+        int index_min=i;
+        for (int j=N-1; j>=i; j--)
+        {
+            if (t[j] < t[index_min])
+                index_min = j;
+        }
+        if (index_min != i)
+        {
+            temp = t[index_min];
+            t[index_min] = t[i];
+            t[i] = temp;
+            count++;
+        }
+    }
+}
+
+void insertion_sort(int t[], const int N)
+{
+    for (int i=0; i<N; i++)
+    {
+        for (int j=i; j>0; j--)
+        {
+
+        }
+    }
+}
+
+void saisir_matrice(const int ROWS, const int COLUMNS, int t[ROWS][COLUMNS])
+{
+    for (int i=0; i<ROWS; i++)
+    {
+        for (int j=0; j < COLUMNS; j++)
+        {
+            printf("Enter the value in index [%d][%d] \n", i, j);
+            scanf("%d", &t[i][j]);
+        }
+    }
+}
+
+void afficher_matrice(const int ROWS, const int COLUMNS, int t[ROWS][COLUMNS])
+{
+    for (int i=0; i<ROWS; i++)
+    {
+        for (int j=0; j<COLUMNS; j++)
+        {
+            printf("%d  ", t[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void sum_matrices(const int ROWS, const int COLUMNS, int A[ROWS][COLUMNS], int B[ROWS][COLUMNS], int C[ROWS][COLUMNS])
+{
+    for (int i=0; i<ROWS; i++)
+    {
+        for (int j=0; j<COLUMNS; j++)
+        {
+            C[i][j] = A[i][j]+B[i][j];
+        }
+    }
+}
+
+void transposed_matrix(const int ROWS, const int COLUMNS, int A[ROWS][COLUMNS], int T[COLUMNS][ROWS])
+{
+    for (int i=0; i<ROWS; i++)
+    {
+        for (int j=0; j<COLUMNS; j++)
+        {
+            T[j][i] = A[j][i];
+        }
+    }
+}
+
 int main()
 {
     //int t[] = {4, 7, 1, 9, 3, 8, 2, 5, 6, 0};
@@ -141,6 +220,32 @@ int main()
     // bubble_sort(t, SIZE);
     // afficher_tableau(t, SIZE);
 
+    // Exercise 7 testing - selection sort
+    //int t[] = {4, 7, 1, 9, 3, 8, 2, 5, 6, 0};
+    //bubble_sort(t, SIZE);
+    //afficher_tableau(t, SIZE);
+
+    //Exercise 8 testing - insertion sort
+
+    // Test of input and print matrix
+    // const int ROWS = 3;
+    // const int COLUMNS = 4;
+    // int t[ROWS][COLUMNS];
+    // saisir_matrice(ROWS, COLUMNS, t);
+    // afficher_matrice(ROWS, COLUMNS, t);
+
+    // //Exercise 12a test - sum of two matrices
+    // int A[3][4] = {1,1,1,1,1,1,1,1,1,1,1,1};
+    // int B[3][4] = {2,2,2,2,2,2,2,2,2,2,2,2};
+    // int C[3][4];
+    // sum_matrices(3,4,A,B,C);
+    // afficher_matrice(3,4, C);
+
+    // Exercise 12b test - transposed matrix
+    int A[3][2] = {1,2,3,4,5,6};
+    int T[2][3];
+    transposed_matrix(3,2,A, T);
+    afficher_matrice(2,3,T);
 
 
 }
