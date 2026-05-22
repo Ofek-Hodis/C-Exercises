@@ -53,6 +53,23 @@ void destroy_array(int **A, const int SIZE)
     A=NULL;
 }
 
+void comparison(int *T1, const int SIZE1, int *T2, const int SIZE2)
+{
+    T1 = malloc(SIZE1 * sizeof(int));
+    T2 = calloc(SIZE2, sizeof(int));
+    for (int i=0; i<SIZE1; i++)
+    {
+        printf("%d\n", *(T1+i));
+    }
+    printf("\n");
+    for (int i=0; i<SIZE2; i++)
+    {
+        printf("%d\n", *(T2+i));
+    }
+    free(T1);
+    free(T2);
+}
+
 int main()
 {
     printf("Enter exercise number");
@@ -69,7 +86,13 @@ int main()
         {
             int **A = NULL;
             const int SIZE = 5;
-            
+
+        }
+    case 7:
+        {
+            int *T1 = NULL;
+            int *T2 = NULL;
+            comparison(T1, 5, T2, 5);
         }
     default : break;
     }
