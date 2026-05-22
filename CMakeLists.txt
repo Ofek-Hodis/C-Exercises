@@ -24,3 +24,5 @@ add_executable(C2TD03 C2TD03.c)
 add_executable(C2TP1 C2TP1.c)
 
 add_executable(TP_recursivite TP_recursivite.c)
+
+add_executable(TP_pointeurs TP_pointeurs.c)
